@@ -27,7 +27,11 @@ class mqQueue{
         $this->ConsumerId='CID-ConsumerId';
 		$this->time=time()."000";
 	 }	
-		
+	/**
+     * 发送队列信息
+     * @param type $post_Body
+     * @return type
+     */	
 	 public function sendmsg($post_Body){
 		$post_Body=utf8toutf($post_Body);
         $sign2=sprintf("%s\n%s\n%s\n%s", $this->Topic, $this->ProducerId, md5($post_Body), $this->time);//$this->Topic."\n".$this->ProducerId."\n".md5($post_Body)."\n".$this->time;
@@ -40,7 +44,10 @@ class mqQueue{
         );
         return  $return=$this->curl_post($this->openurl.'/message/',$msg,$header_arr);
      }
-	 
+	 /**
+     * 接收队列信息
+     * @return type
+     */
 	public function Responsemsg(){
         $sign2=sprintf("%s\n%s\n%s", $this->Topic, $this->ConsumerId,$this->time);//$this->Topic."\n".$this->ProducerId."\n".md5($post_Body)."\n".$this->time;
 		$sign = base64_encode(hash_hmac('sha1', htmlentities($sign2),$this->SecretKey, true)); 
@@ -52,7 +59,29 @@ class mqQueue{
         );
         return  $return=$this->curl_post($this->openurl.'/message/','',$header_arr);
      }
-	 
+	/**
+     * 删除队列
+     * @param type $msgHandle
+     * @return type
+     */
+	public function deleteMsg($msgHandle) {
+        $sign2 = sprintf("%s\n%s\ns\n%s", $this->Topic, $this->ConsumerId, $msgHandle, $this->time); //$this->Topic."\n".$this->ProducerId."\n".md5($post_Body)."\n".$this->time;
+        $sign = base64_encode(hash_hmac('sha1', htmlentities($sign2), $this->SecretKey, true));
+        $header_arr = array(
+            "Content-Type: text/plain;charset=UTF-8",
+            "AccessKey:" . $this->AccessKey,
+            "ConsumerId:" . $this->ConsumerId,
+            "Signature:" . $sign
+        );
+        return $return = $this->curl_post($this->openurl . '/message/', '', $header_arr, $mothod = 'DELETE');
+    }
+	/**
+     * 队列请求
+     * @param string $url
+     * @param type $post_Body
+     * @param type $header_arr
+     * @return type
+     */
      private function curl_post($url, $post_Body="",$header_arr) {
         $cookie_file = "./";
         $post_str = '';
