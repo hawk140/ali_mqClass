@@ -1,0 +1,20 @@
+{
+	"name": "hawk140/hawk140/ali_mqClass",
+	"type": "class",
+    "description": "hawk140/ali_mqClass is a queue api demo for aliyun mq service",
+    "keywords": ["ali_mqClass", "aliyun", "mq service"],
+    "homepage": "https://github.com/hawk140/ali_mqClass",
+    "license": "MIT",
+	"authors": [
+		{
+			"name": "hawk140",
+			"email": "zlf140@163.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.29"
+	},
+	"autoload": {
+        "psr-0": { "ali_mqClass\\": "" }
+    }
+}
