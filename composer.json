@@ -1,8 +1,8 @@
 {
-	"name": "hawk140/hawk140/ali_mqClass",
+	"name": "hawk140/mqServiceForAliyun",
 	"type": "class",
-    "description": "hawk140/ali_mqClass is a queue api demo for aliyun mq service",
-    "keywords": ["ali_mqClass", "aliyun", "mq service"],
+    "description": "hawk140/mqServiceForAliyun is a queue api demo for aliyun mq service",
+    "keywords": ["mqServiceForAliyun", "aliyun", "mq service"],
     "homepage": "https://github.com/hawk140/ali_mqClass",
     "license": "MIT",
 	"authors": [
